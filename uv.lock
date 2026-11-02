@@ -6,6 +6,9 @@ requires-python = ">=3.12"
 name = "cmps3000-debugging-assignment"
 version = "0.1.0"
 source = { editable = "." }
+dependencies = [
+    { name = "pytest" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -13,6 +16,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "pytest", specifier = ">=9.2.0" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=9.2.0" }]
