@@ -1,4 +1,5 @@
 from cmps3000_debugging_assignment.buggy_code import Order
+from cmps3000_debugging_assignment.buggy_code import main
 
 
 def test_add_item():
@@ -66,7 +67,7 @@ def test_order_total_with_zero_price():
 
 def test_order_total_with_zero_total():
     order = Order("Alice", [("Book", 0, 0.00), ("Pen", 0, 0.00)])
-    assert order.calculate_total() == "Empty Order"
+    assert order.calculate_total() == 0
 
 
 def test_apply_discount():
@@ -74,3 +75,34 @@ def test_apply_discount():
     assert order.apply_discount("SAVE10") == 0.1
     assert order.apply_discount("SAVE20") == 0.2
     assert order.apply_discount("SAVE30") is None
+
+
+def test_print_summary(capsys):
+    order = Order("Alice", [("Book", 2, 15.00), ("Pen", 5, 1.50)])
+    order.print_summary()
+    captured = capsys.readouterr()
+
+    assert "Order Summary for Alice" in captured.out
+    assert "2 x Book @ $15.00" in captured.out
+    assert "5 x Pen @ $1.50" in captured.out
+    assert "Total: $ 37.5" in captured.out
+
+
+def test_print_summary_empty(capsys):
+    order = Order("Alice", [])
+    order.print_summary()
+    captured = capsys.readouterr()
+
+    assert "Order Summary for Alice" in captured.out
+    assert "Total: $ 0" in captured.out
+
+
+def test_main_function(capsys):
+
+    main()
+    captured = capsys.readouterr()
+
+    assert "Order Summary for Alice" in captured.out
+    assert "3 x Notebook @ $5.00" in captured.out
+    assert "Total: $ 45" in captured.out
+    assert "Discount rate: None" in captured.out

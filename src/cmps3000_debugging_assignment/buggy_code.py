@@ -9,8 +9,6 @@ class Order:
         total = 0
         for item in self.items:
             total += item[1] * item[2]
-        if total == 0:
-            return "Empty Order"
         return total
 
     def add_item(self, item_name, quantity, price):
