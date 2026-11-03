@@ -1,5 +1,4 @@
-from cmps3000_debugging_assignment.buggy_code import Order
-from cmps3000_debugging_assignment.buggy_code import main
+from cmps3000_debugging_assignment.buggy_code import Order, main
 
 
 def test_add_item():
